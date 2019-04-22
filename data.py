@@ -3,7 +3,7 @@ import nibabel as nib
 import cv2
 
 
-imgdirs = os.listdir('./training/')
+imgdirs = os.listdir('../training/')
 
 with open('label.txt', 'a') as f:
     for imgdir in imgdirs:
