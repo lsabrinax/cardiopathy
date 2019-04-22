@@ -8,6 +8,7 @@ imgdirs = os.listdir('../training/')
 with open('label.txt', 'a') as f:
     for imgdir in imgdirs:
         line = linecache.getline('../training/'+imgdir+'/Inco.cfg', 3)
+        print(line)
         label = line.strip().split()[1]
         data = nib.load('../training/'+imgdir+'/'+imgdir+'_4d.nii.gz')
         imgs = data.get_data()
