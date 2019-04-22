@@ -1,7 +1,7 @@
 import os
 import nibabel as nib
 import cv2
-
+import linecache
 
 imgdirs = os.listdir('../training/')
 
