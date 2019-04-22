@@ -7,6 +7,7 @@ imgdirs = os.listdir('../training/')
 
 with open('label.txt', 'a') as f:
     for imgdir in imgdirs:
+        print(imgdir)
         # print('../training/'+imgdir+'/Info.cfg')
         line = linecache.getline('../training/'+imgdir+'/Info.cfg', 3)
         # print(line)
