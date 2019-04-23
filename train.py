@@ -8,7 +8,7 @@ import dataset
 import visdom
 import utils
 import torch
-model = resnet(pretrained=True)
+model = resnet34(pretrained=True)
 model.conv1 = Conv2d(1, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
 nn.init.kaiming_normal_(model.conv1.weight, mode='fan_out', nonlinearity='relu')
 # nn.init.constant_(model.features[0].bias, 0)
