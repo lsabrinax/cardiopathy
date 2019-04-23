@@ -4,6 +4,7 @@ import cv2
 import linecache
 
 imgdirs = os.listdir('../training/')
+print('imgdirs length is %d' % len(imgdirs))
 
 with open('label.txt', 'a') as f:
     for imgdir in imgdirs:
