@@ -20,7 +20,7 @@ transform = T.Compose([
 	T.Resize(224),
 	T.CenterCrop(224),
 	T.ToTensor(),
-	T.Normalize(mean=0.5, std=0.5)
+	T.Normalize(mean=[0.5], std=[0.5])
 ])
 
 train_dataset = dataset.CMRDataset(transforms=transform)
