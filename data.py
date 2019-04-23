@@ -23,7 +23,7 @@ with open('../testing/label.txt', 'a') as f:
         # for i in range(t):
             for j in range(z):
                 imgname = '../test/'+imgdir+'/'+str(j+1)+'.png'
-                cv2.imwrite(imgname, imgs[:,:,j,i])
+                cv2.imwrite(imgname, imgs[:,:,j])
                 f.write(imgname+' '+'\n')
                 print(imgname+'done!')
 
