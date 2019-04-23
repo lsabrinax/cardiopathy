@@ -42,7 +42,7 @@ def train():
 	for epoch in range(20):
 		loss_meter.reset()
 
-		for i, img, label in enumurate(dataloader):
+		for i, img, label in enumerate(dataloader):
 			if use_gpu:
 				img = img.cuda()
 				label = label.cuda()
