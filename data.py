@@ -20,7 +20,7 @@ with open('label.txt', 'a') as f:
             os.makedirs('../train/'+imgdir)
         for i in range(t):
             for j in range(z):
-                imgname = '../train/'+imgdir+'/'+str(i*z+j+1)'.png'
+                imgname = '../train/'+imgdir+'/'+str(i*z+j+1)+'.png'
                 cv2.imwrite(imgname, imgs[:,:,j,i])
                 f.write(imgname+' '+label+'\n')
                 print(imgname+'done!')
