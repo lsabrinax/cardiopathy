@@ -33,7 +33,7 @@ use_gpu = torch.cuda.is_available()
 if use_gpu:
 	model.cuda()
 	cudnn.benchmark = True
-	optimizer.cuda()
+	criterion.cuda()
 
 
 def train():
