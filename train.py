@@ -9,10 +9,10 @@ import visdom
 import utils
 import torch
 model = resnet34(pretrained=True)
-model.conv1 = Conv2d(1, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+model.conv1 = nn.Conv2d(1, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
 nn.init.kaiming_normal_(model.conv1.weight, mode='fan_out', nonlinearity='relu')
 # nn.init.constant_(model.features[0].bias, 0)
-model.fc = Linear(in_features=512, out_features=5, bias=True)
+model.fc = nn.Linear(in_features=512, out_features=5, bias=True)
 
 transform = T.Compose([
 	T.Resize(224),
