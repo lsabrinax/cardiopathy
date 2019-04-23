@@ -22,8 +22,9 @@ class CMRDataset(Dataset):
 			return self[index+1]
 		if self.transforms:
 			img = self.transforms(img)
-		label = self.labelfile[label]
+		label = self.label2idx[label]
 		return img, label
 
 	def __len__(self):
 		return len(self.gt)
+
