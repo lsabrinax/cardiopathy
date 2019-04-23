@@ -22,7 +22,7 @@ transform = T.Compose([
 ])
 
 train_dataset = dataset.CMRDataset(transforms=transform)
-dataloader = Dataloader(train_dataset, batch_size=32, shuffle=True, num_workers=2)
+dataloader = DataLoader(train_dataset, batch_size=32, shuffle=True, num_workers=2)
 optimizer = optim.SGD(model.parameters(), lr=1e-3, momentum=0.9, weight_decay=5e-4)
 criterion = nn.CrossEntopyLoss()
 loss_meter = utils.averager()
