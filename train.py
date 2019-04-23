@@ -57,7 +57,7 @@ def train():
 				vis.line(X=torch.Tensor([i+1]), Y=loss.data.view(-1), win='train_loss', update='append' if i > 10 else  None, opts={'title': 'train_loss'})
 
 			if (i+1) % 100 == 0:
-				mes += '[%d/%d][%d/%d] loss: %f' % (epoch+1, 20, i+1, len(dataloader), loss_meter.val())
+				mes += '[%d/%d][%d/%d] loss: %f<br>' % (epoch+1, 20, i+1, len(dataloader), loss_meter.val())
 				loss_meter.reset()
 				vis.text(mes, win='text', opts={'title': 'display_message'})
 		torch.save(model.state_dict(), 'expr/restnet34_%d.pth' % epoch)
