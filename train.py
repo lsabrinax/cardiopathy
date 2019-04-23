@@ -24,7 +24,7 @@ transform = T.Compose([
 train_dataset = dataset.CMRDataset(transforms=transform)
 dataloader = DataLoader(train_dataset, batch_size=32, shuffle=True, num_workers=2)
 optimizer = optim.SGD(model.parameters(), lr=1e-3, momentum=0.9, weight_decay=5e-4)
-criterion = nn.CrossEntopyLoss()
+criterion = nn.CrossEntropyLoss()
 loss_meter = utils.averager()
 
 use_gpu = torch.cuda.is_available()
