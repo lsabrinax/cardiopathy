@@ -1,6 +1,6 @@
 from torchvision.models import resnet34
 from torchvision import transforms as T
-from torch.utils.data import Dataloader
+from torch.utils.data import DataLoader
 import torchnet.meter as meter
 import torch.nn as nn
 import torch.optim as optim
