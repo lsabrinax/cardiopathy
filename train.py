@@ -85,7 +85,7 @@ def test():
 		if use_gpu:
 			img = img.cuda()
 			pred = model(img)
-			prob = nn.functional.sofmax(pred, dim=1)
+			prob = nn.functional.softmax(pred, dim=1)
 			res, index = torch.topk(prob, 1)
 			with open('pred.txt', 'a') as f:
 				for path, idx in zip(imgpath, index):
