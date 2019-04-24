@@ -36,7 +36,7 @@ transform = T.Compose([
 
 
 idx2label = {0: 'NOR', 1: 'MINF', 2: 'DCM', 3: 'HCM', 4: 'RV'}
-data_set = dataset.CMRDataset(labelfile=opt.lablefile, transforms=transform, dtype=opt.type)
+data_set = dataset.CMRDataset(labelfile=opt.labelfile, transforms=transform, dtype=opt.type)
 dataloader = DataLoader(data_set, batch_size=32, shuffle=True, num_workers=2)
 optimizer = optim.SGD(model.parameters(), lr=1e-3, momentum=0.9, weight_decay=5e-4)
 criterion = nn.CrossEntropyLoss()
