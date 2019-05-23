@@ -1,6 +1,7 @@
 from torch.utils.data import Dataset
 from PIL import Image
-
+import os
+import torch
 
 class CMRDataset(Dataset):
 	"""docstring for CMRDataset"""
@@ -34,3 +35,40 @@ class CMRDataset(Dataset):
 	def __len__(self):
 		return len(self.gt)
 
+
+class FeatureDataset(Dataset):
+
+	def __init__(self, root='training', train=True, test=False):
+		self.test = test
+		self.root = root
+		self.label2idx = {'NOR': 0, 'MINF': 1, 'DCM': 2, 'HCM': 3, 'RV': 4}
+		path = os.listdir(root)
+		path_len = len(path)
+		if train:
+			self.path = path[:int(path_len*0.8)]
+		elif test == False:
+			self.path = path[int(path_len*0.8):]
+		else:
+			self.path = path
+
+	def __getitem__(self, index):
+		file = os.path.join(self.root, self.path[index], 'Info.cfg')
+		with open(file, 'r') as f:
+			lines = f.readlines()
+		data = []
+		data += float(lines[0].strip().split()[-1])
+		data += float(lines[1].strip().split()[-1])
+
+		if self.test:
+			data += float(lines[2].strip().split()[-1])
+			data += float(lines[4].strip().split()[-1])
+			return torch.Tensor(data)
+		else:
+			data += float(lines[3].strip().split()[-1])
+			data += float(lines[5].strip().split()[-1])
+			label = self.label2idx[lines[2].strip().split()[-1]]
+			return (torch.Tensor(data), label)
+
+	
+	def __len__(self):
+		return len(self.path)
