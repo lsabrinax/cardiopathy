@@ -94,7 +94,7 @@ def val(model, dataloader, criterion):
         prob = model(feature)
         loss = criterion(prob, target)
         score = t.nn.functional.softmax(prob, dim=1)
-        index = score.topk(1)[1]
+        index = score.topk(1)[1].view(-1)
         loss_meter.add(loss.item())
         ncorrect += (index == target).cpu().sum().item()
 
