@@ -55,6 +55,7 @@ def train(**kwargs):
 
             optimizer.zero_grad()
             prob = featurenet(feature)
+            print(prob)
             loss = criterion(prob, target)
             loss.backward()
             optimizer.step()
@@ -69,6 +70,7 @@ def train(**kwargs):
 
         #验证和可视化
         accu, loss = val(featurenet, val_dataloader, criterion)
+        featurenet.train()
         vis.plot('val_loss', loss)
         vis.log('epoch: {epoch}, loss: {loss}, accu: {accu}'.format(
             epoch=epoch, loss=loss, accu=accu
@@ -92,7 +94,7 @@ def val(model, dataloader, criterion):
         loss = criterion(prob, target)
         index = prob.topk(1)[1][0]
         loss_meter.add(loss.item())
-        ncorrect += (index == label).sum().item()
+        ncorrect += (index == target).cpu().sum().item()
 
     accu = float(ncorrect) / nsample
     loss = loss_meter.value()[0]
