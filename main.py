@@ -41,7 +41,7 @@ def train(**kwargs):
     val_dataloader = DataLoader(val_dataset, opt.batch_size, shuffle=False, num_workers=opt.num_workers)
     #定义优化器和随时函数
     optimizer = t.optim.Adam(featurenet.parameters(), opt.lr)
-    criterion = t.nn.CrossEntropyLoss.to(device)
+    criterion = t.nn.CrossEntropyLoss().to(device)
 
     #计算重要指标
     loss_meter = AverageValueMeter()
