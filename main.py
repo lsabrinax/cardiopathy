@@ -93,12 +93,12 @@ def val(model, dataloader, criterion):
         target = label.to(device)
         prob = model(feature)
         loss = criterion(prob, target)
-        score = t.nn.functional.softmax(prob)
+        score = t.nn.functional.softmax(prob, dim=1)
         index = score.topk(1)[1]
         loss_meter.add(loss.item())
         ncorrect += (index == target).cpu().sum().item()
 
-    accu = float(ncorrect) / nsample
+    accu = float(ncorrect) / nsample * 100
     loss = loss_meter.value()[0]
     return accu, loss
 
