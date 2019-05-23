@@ -41,7 +41,7 @@ def train(**kwargs):
     val_dataloader = DataLoader(val_dataset, opt.batch_size, shuffle=False, num_workers=opt.num_workers)
     #定义优化器和随时函数
     optimizer = t.optim.Adam(featurenet.parameters(), opt.lr)
-    criterion = t.nn.NLLLoss().to(device)
+    criterion = t.nn.CrossEntropyLoss.to(device)
 
     #计算重要指标
     loss_meter = AverageValueMeter()
@@ -93,7 +93,8 @@ def val(model, dataloader, criterion):
         target = label.to(device)
         prob = model(feature)
         loss = criterion(prob, target)
-        index = prob.topk(1)[1][0]
+        score = t.nn.functional.softmax(loss)
+        index = score.topk(1)[1][0]
         loss_meter.add(loss.item())
         ncorrect += (index == target).cpu().sum().item()
 
