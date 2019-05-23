@@ -56,19 +56,19 @@ class FeatureDataset(Dataset):
 		with open(file, 'r') as f:
 			lines = f.readlines()
 		data = []
-		data += float(lines[0].strip().split()[-1])
-		data += float(lines[1].strip().split()[-1])
+		data += [float(lines[0].strip().split()[-1])]
+		data += [float(lines[1].strip().split()[-1])]
 
 		if self.test:
-			data += float(lines[2].strip().split()[-1])
-			data += float(lines[4].strip().split()[-1])
+			data += [float(lines[2].strip().split()[-1])]
+			data += [float(lines[4].strip().split()[-1])]
 			return torch.Tensor(data)
 		else:
-			data += float(lines[3].strip().split()[-1])
-			data += float(lines[5].strip().split()[-1])
+			data += [float(lines[3].strip().split()[-1])]
+			data += [float(lines[5].strip().split()[-1])]
 			label = self.label2idx[lines[2].strip().split()[-1]]
 			return (torch.Tensor(data), label)
 
-	
+
 	def __len__(self):
 		return len(self.path)
