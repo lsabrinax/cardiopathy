@@ -7,7 +7,7 @@ class FeatureNet(nn.Module):
 		self.features = nn.Sequential(
 			nn.Linear(inchannel, 5),
 			nn.ReLU(inplace=True),
-			nn.Linear(10, outchannel),
+			nn.Linear(5, outchannel),
 		)
 
 	def forward(self, x):
