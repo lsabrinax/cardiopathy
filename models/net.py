@@ -8,7 +8,6 @@ class FeatureNet(nn.Module):
 			nn.Linear(inchannel, 10),
 			nn.ReLU(inplace=True),
 			nn.Linear(10, outchannel),
-			nn.Softmax(dim=1)
 		)
 
 	def forward(self, x):
