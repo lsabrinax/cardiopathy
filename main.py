@@ -55,8 +55,8 @@ def train(**kwargs):
 
             optimizer.zero_grad()
             prob = featurenet(feature)
-            print(prob)
-            print(target)
+            # print(prob)
+            # print(target)
             loss = criterion(prob, target)
             loss.backward()
             optimizer.step()
