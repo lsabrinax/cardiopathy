@@ -69,7 +69,7 @@ def train(**kwargs):
                 if os.path.exists(opt.debug_file):
                     import ipdb
                     ipdb.set_trace()
-        t.save(featurenet.state_dict(), 'checkpoints/{epoch}_{time}.pth'.format(epoch=epoch, time=time.strftime('%m%d_%H_%M_%S')))
+        t.save(featurenet.state_dict(), 'checkpoints/{epoch}_{time}_{loss}.pth'.format(epoch=epoch, time=time.strftime('%m%d_%H_%M_%S'), loss=loss_meter.value()[0]))
 
         #验证和可视化
         accu, loss = val(featurenet, val_dataloader, criterion)
