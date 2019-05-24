@@ -42,7 +42,7 @@ def train(**kwargs):
     val_dataset = dataset.FeatureDataset(root=opt.data_root, train=False, test=False)
     val_dataloader = DataLoader(val_dataset, opt.batch_size, shuffle=False, num_workers=opt.num_workers)
     #定义优化器和随时函数
-    optimizer = t.optim.Adam(featurenet.parameters(), lr)
+    optimizer = t.optim.SGD(featurenet.parameters(), lr)
     criterion = t.nn.CrossEntropyLoss().to(device)
 
     #计算重要指标
