@@ -6,6 +6,7 @@ from torch.utils.data import DataLoader
 from torchnet.meter import AverageValueMeter
 from vis import Visualizer
 import os
+import time
 
 class Config(object):
     env = 'CMR_linear'
@@ -68,7 +69,7 @@ def train(**kwargs):
                 if os.path.exists(opt.debug_file):
                     import ipdb
                     ipdb.set_trace()
-        t.save(featurenet.state_dict(), 'checkpoints/%d.pth' % epoch)
+        t.save(featurenet.state_dict(), 'checkpoints/{epoch}_{time}.pth'.format(epoch=epoch, time=time.strftime('%m%d_%H_%M_%S')))
 
         #验证和可视化
         accu, loss = val(featurenet, val_dataloader, criterion)
