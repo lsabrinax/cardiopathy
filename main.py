@@ -27,6 +27,7 @@ def train(**kwargs):
         setattr(opt, k, v)
     vis = Visualizer(opt.env, opt.port)
     device = t.device('cuda') if opt.use_gpu else t.device('cpu')
+    lr = opt.lr
 
     #网络配置
     featurenet = FeatureNet(4, 5)
@@ -40,7 +41,7 @@ def train(**kwargs):
     val_dataset = dataset.FeatureDataset(root=opt.data_root, train=False, test=False)
     val_dataloader = DataLoader(val_dataset, opt.batch_size, shuffle=False, num_workers=opt.num_workers)
     #定义优化器和随时函数
-    optimizer = t.optim.Adam(featurenet.parameters(), opt.lr)
+    optimizer = t.optim.Adam(featurenet.parameters(), lr)
     criterion = t.nn.CrossEntropyLoss().to(device)
 
     #计算重要指标
@@ -76,6 +77,11 @@ def train(**kwargs):
         vis.log('epoch: {epoch}, loss: {loss}, accu: {accu}'.format(
             epoch=epoch, loss=loss, accu=accu
         ))
+
+        lr = lr * 0.9
+        for param_group in optimizer.param_groups:
+            optimizer[param_group] = lr
+
 
 
 @t.no_grad()
