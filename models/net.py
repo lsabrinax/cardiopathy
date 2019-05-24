@@ -7,7 +7,7 @@ class FeatureNet(nn.Module):
 		self.features = nn.Sequential(
 			nn.BatchNorm1d(inchannel),
 			nn.Linear(inchannel, 5),
-			nn.ReLU(inplace=True),
+			nn.Sigmoid(),
 			# nn.Linear(10, 5),
 			# nn.ReLU(inplace=True),
 			nn.Linear(5, outchannel),
