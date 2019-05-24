@@ -80,7 +80,7 @@ def train(**kwargs):
 
         lr = lr * 0.9
         for param_group in optimizer.param_groups:
-            optimizer[param_group] = lr
+            param_group['lr'] = lr
 
 
 
